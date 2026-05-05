@@ -17,98 +17,88 @@ import com.Proyecto.PPOOII.Repository.PersonaRepository;
 @Service("PersonaService")
 public class PersonaServiceImpl implements IPersonaService {
 	
-	//INYECCION DE DEPENDENCIAS
+		// ========= INYECCIÓN DE DEPENDENCIAS ==========
 	@Autowired
 	private PersonaRepository IPersonaRepository;
-	
-	//==============LOGS
-	//Logs de error
+	//==================== LOGS ============================
+	//LOGS DE ERROR
 	private static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(PersonaServiceImpl.class);
-	
 	//INSERT
-
 	@Override
 	public boolean guardar(Persona persona) {
 		try {
 			if (persona == null) {
-				logger.error("ERROR AGREGAR_PERSONA: LA PERSONA ES NULO");
-				return false;
+				logger.error("ERROR AGREGAR_PERSONA: LA PERSONA ES NULO!");
+				return false;				
 			}
 			else {
 				IPersonaRepository.save(persona);
 				return true;
 			}
-		}catch(Exception e){
-			logger.error("ERROR AGREGAR_PERSONA_ LA PERSONA NO SE HA AGREGADO");
+		}catch(Exception e) {
+			logger.error("ERROR AGREGAR_PERSONA: LA PERSONA NO SE HA GUARDADO!");
 			return false;
 		}
 	}
-	
 	//UPDATE
 	@Override
 	public boolean actualizar(Persona persona) {
 		try {
-			if ((persona == null) || (persona.getId()== 0)) {
-				logger.error("ERROR EDITAR_PERSONA: LA PERSONA ES NULO O EL ID ES 0");
+			if ((persona == null) || (persona.getId() == 0)) {
+				logger.error("ERROR EDITAR_PERSONA:  LA PERSONA ES NULO O EL ID ES 0!");		
 				return false;
 			}
-			else {
+			else {	
 				IPersonaRepository.save(persona);
 				return true;
 			}
-		}catch(Exception e){
-			logger.error("ERROR EDITAR_PERSONA_ LA PERSONA NO SE HA EDITADO");
+		}catch(Exception e) {
+			logger.error("ERROR EDITAR_PERSONA: LA PERSONA NO SE HA EDITADO!");		
 			return false;
 		}
 	}
-
 	//DELETE
 	@Override
 	public boolean eliminar(int id) {
 		try {
 			if ((id == 0)) {
-				logger.error("ERROR ELIMINAR_PERSONA: EL ID DE LA PERSONA ES 0");
+				logger.error("ERROR ELIMINAR_PERSONA: EL ID DEL PERSONA ES 0!");
 				return false;
 			}
 			else {
-				Persona persona = IPersonaRepository.findById(id).orElse(null);
+				Persona persona = IPersonaRepository.findById(id);
 				IPersonaRepository.delete(persona);
 				return true;
 			}
-		}catch(Exception e){
-			logger.error("ERROR ELIMINAR_PERSONA_ LA PERSONA NO SE HA ELIMINADO");
+		}catch(Exception e) {
+			logger.error("ERROR ELIMINAR_PERSONA: LA PERSONA NO SE HA ELIMINADO!");
 			return false;
-		}
+		} 
 	}
-
 	//LISTA DE PRODUCTOS
 	@Override
 	public List<Persona> consultarPersona(Pageable pageable) {
-		return IPersonaRepository.findAll(pageable).getContent();
+		return  IPersonaRepository.findAll(pageable).getContent(); 
 	}
 
-
-	//=========METODOS DE BUSQUEDA
-	//persona por ID | valor unico
+	//================ METODOS DE BUSQUEDA =============================
+	//PERSONA POR ID | VALOR UNICO
 	@Override
 	public Persona findById(int id) {
-		return IPersonaRepository.findById(id).orElse(null);
-		
+		return IPersonaRepository.findById(id);
 	}
-	
-	//LOSTA DE PERSONAS POR NOMBRE
+
+	//LISTA DE PERSONAS POR NOMBRE
 	@Override
 	public List<Persona> findByNombre(String pnombre) {
-	    return IPersonaRepository.findByPnombre(pnombre); // 🔥 corregido
+		return IPersonaRepository.findByPnombre(pnombre); 
 	}
 
 	//LISTA DE PERSONAS POR EDAD
 	@Override
 	public List<Persona> findByEdad(int edad) {
-		return IPersonaRepository.findByEdad(edad);
+		return IPersonaRepository.findByEdad(edad); 
 	}
-	
-
 
 }
 

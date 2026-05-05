@@ -4,15 +4,21 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.Proyecto.PPOOII.Entities.Persona;
 
-public interface PersonaRepository extends JpaRepository<Persona, Integer> {
+public interface PersonaRepository extends JpaRepository<Persona, Integer>, CrudRepository<Persona, Integer> {
 
-    // 🔥 IMPORTANTE: debe coincidir con "pnombre"
-    List<Persona> findByPnombre(String pnombre);
+   	
+	//Hay Métodos que JPA ya los tiene desarrollados, se pueden crear para tener
+	//una manipulación más especifica a la hora de usarlos en el service	
 
-    List<Persona> findByEdad(int edad);
+	public abstract Persona findById(int id);
 
-    Page<Persona> findAll(Pageable pageable);
+	public abstract List<Persona> findByPnombre(String pnombre);
+
+	public abstract List<Persona> findByEdad(int edad);
+
+	public abstract Page<Persona> findAll(Pageable pageable);
 }

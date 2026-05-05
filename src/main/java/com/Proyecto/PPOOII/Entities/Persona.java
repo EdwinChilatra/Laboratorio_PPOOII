@@ -1,57 +1,85 @@
 package com.Proyecto.PPOOII.Entities;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "persona")
-public class Persona {
+@Table(name = "persona", schema = "PPOOII")
+public class Persona implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID")
-    private int id;
+    private static final long serialVersionUID = 1L;
 
-    @Column(name="PNombre")
-    private String pnombre;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@Column(name = "ID")
+	public int id;
+	
+	@Column(name="PNOMBRE")
+	private String pnombre;
+	
+	@Column(name="EDAD")
+	private int edad;
+	
+	@Column(name="ubicacion")
+	private String ubicacion;
+	
+	public Persona () {}
+	
+	public Persona(String pnombre, int Edad, String ubicacion) {
+		super();
+		this.pnombre = pnombre;
+		this.edad = Edad;
+		this.ubicacion = ubicacion;
+	}
+	
+	public Persona(int Id, String pnombre, int Edad, String ubicacion) {
+		super();
+		this.id = Id;
+		this.pnombre = pnombre;
+		this.edad = Edad;
+		this.ubicacion = ubicacion;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
 
-    @Column(name="Edad")
-    private int edad;
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public Persona() {}
+	public String getPnombre() {
+		return pnombre;
+	}
 
-    public Persona(String pnombre, int edad) {
-        this.pnombre = pnombre;
-        this.edad = edad;
-    }
+	public void setPnombre(String pnombre) {
+		this.pnombre = pnombre;
+	}
 
-    public Persona(int id, String pnombre, int edad) {
-        this.id = id;
-        this.pnombre = pnombre;
-        this.edad = edad;
-    }
+	public int getEdad() {
+		return edad;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public String getUbicacion() {
+		return ubicacion;
+	}
 
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
 
-    public String getPnombre() {
-        return pnombre;
-    }
-
-    public void setPnombre(String pnombre) {
-        this.pnombre = pnombre;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
+	@Override
+	public String toString() {
+		return "Persona [id=" + this.id + ", Primer Nombre=" + this.pnombre + ", Edad=" + this.edad + ", Ubicacion: " + this.ubicacion +"]" ;
+	}
 }
