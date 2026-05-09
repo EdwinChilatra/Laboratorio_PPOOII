@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.Proyecto.PPOOII.Entities.Persona;
@@ -21,4 +22,8 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer>, Crud
 	public abstract List<Persona> findByEdad(int edad);
 
 	public abstract Page<Persona> findAll(Pageable pageable);
+
+	
+	@Query("SELECT per FROM Persona per WHERE per.ubicacion is not null")
+	public abstract List<Persona> getPersonas();
 }

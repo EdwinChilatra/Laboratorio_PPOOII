@@ -15,7 +15,6 @@ import com.Proyecto.PPOOII.Config.Model.JwtRequest;
 import com.Proyecto.PPOOII.Config.Model.JwtResponse;
 import com.Proyecto.PPOOII.Entities.Usuario;
 import com.Proyecto.PPOOII.Services.UsuarioServiceImpl;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin
