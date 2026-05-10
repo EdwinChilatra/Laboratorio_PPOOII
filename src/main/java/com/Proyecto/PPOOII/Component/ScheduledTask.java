@@ -88,4 +88,28 @@ public class ScheduledTask {
         	System.out.println(e.getMessage());
 		}
     }
+
+     // ========= CADA 2 MINUTOS ==========
+     @Scheduled(cron = "0 */2 * * * ?")
+     public void cadaDosMinutos() {
+ 
+         logger.info("Cada 2 minutos :: {}",
+                 dateTimeFormatter.format(LocalDateTime.now()));
+     }
+ 
+     // ========= TODOS LOS LUNES A LAS 5:17 PM ==========
+     @Scheduled(cron = "0 17 17 ? * MON")
+     public void lunes517PM() {
+ 
+         logger.info("Lunes 5:17 PM :: {}",
+                 dateTimeFormatter.format(LocalDateTime.now()));
+     }
+ 
+     // ========= TRES VECES AL DÍA: LUNES, MIÉRCOLES Y VIERNES ==========
+     @Scheduled(cron = "0 0 8,12,18 ? * MON,WED,FRI")
+     public void tresVecesDia() {
+ 
+         logger.info("Lunes, miércoles y viernes :: {}",
+                 dateTimeFormatter.format(LocalDateTime.now()));
+     }
 }
